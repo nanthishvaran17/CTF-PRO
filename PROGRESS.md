@@ -12,12 +12,12 @@ Statuses: `TODO` | `DOING` | `DONE` | `BLOCKED`
 - [x] Create `docs/THREAT_MODEL.md` (Asset boundaries, SSRF prevention, zip-slip, sandbox) <!-- id: 1.4 -->
 
 ## 2. Core Engine & File Intake
-- [ ] Safe file storage & content-addressed hashing (SHA-256, chunked streaming) <!-- id: 2.1 -->
-- [ ] True magic-byte file type detection (30+ formats, recursive fallback) <!-- id: 2.2 -->
-- [ ] Archive unpacker with zip-slip, symlink, and bomb protection <!-- id: 2.3 -->
-- [ ] High-performance string extractor (ASCII, UTF-8, UTF-16LE/BE, null-delimited, byte offsets) <!-- id: 2.4 -->
-- [ ] Universal Flag Discovery Engine (regex, case-folding, custom formats, auto-detect) <!-- id: 2.5 -->
-- [ ] Multi-layer Recursive Decoder (Base64/32/16, Hex, URL, HTML, ROT13, Caesar, XOR, cyclic guard, provenance tracking) <!-- id: 2.6 -->
+- [x] Safe file storage & content-addressed hashing (SHA-256, chunked streaming) <!-- id: 2.1 -->
+- [x] True magic-byte file type detection (30+ formats, recursive fallback) <!-- id: 2.2 -->
+- [x] Archive unpacker with zip-slip, symlink, and bomb protection <!-- id: 2.3 -->
+- [x] High-performance string extractor (ASCII, UTF-8, UTF-16LE/BE, null-delimited, byte offsets) <!-- id: 2.4 -->
+- [x] Universal Flag Discovery Engine (regex, case-folding, custom formats, auto-detect) <!-- id: 2.5 -->
+- [x] Multi-layer Recursive Decoder (Base64/32/16, Hex, URL, HTML, ROT13, Caesar, XOR, cyclic guard, provenance tracking) <!-- id: 2.6 -->
 
 ## 3. Specialized Analysis Modules
 - [ ] Stego Analyzer (PNG chunks, LSB extraction, bit planes, channels, entropy, palette, OCR/QR fallback) <!-- id: 3.1 -->
