@@ -1,0 +1,267 @@
+ROLE
+Act as a senior security engineer, CTF specialist, full-stack architect and
+product designer. Build CTF HUNTER X end to end, autonomously, in ONE run:
+a local-first, evidence-based CTF analysis and flag discovery platform for
+authorized CTF files and environments only. Do NOT stop for approval between
+phases. Work continuously until the Definition of Done is fully met.
+
+=====================================================================
+0. ABSOLUTE RULES
+=====================================================================
+- No fake flags, no mock results, no hardcoded demo findings, no simulated
+  analysis, no placeholder algorithms, no non-functional buttons.
+- Every result comes from real input + real execution. If a tool is missing,
+  show "unavailable" and use a real Python fallback; never fake output.
+- Original files are read-only. Record SHA-256, size, true type (magic bytes),
+  byte offsets, extraction paths, every transformation.
+- No confidence percentages unless the formula is defined. Use explainable
+  evidence reasons.
+- Flag statuses: DISCOVERED, CANDIDATE, EVIDENCE-SUPPORTED, VALIDATION-PENDING,
+  VERIFIED-BY-CHALLENGE (only after authoritative platform/organizer
+  confirmation), REJECTED, UNRESOLVED.
+- Test fixtures exist only in tests/ and are never shown as real discoveries.
+- Never claim anything is done/passing without actually running it and
+  showing real output. If something cannot be implemented, list it under
+  "Limitations" in README and in reports.
+- Only authorized targets. No internet scanning. SSRF-safe web module.
+
+=====================================================================
+1. AUTONOMOUS EXECUTION PROTOCOL (replaces phase approvals)
+=====================================================================
+1. Create PROGRESS.md first: checklist of every item below with status
+   (TODO / DOING / DONE / BLOCKED), updated after each milestone.
+   If the session restarts, read PROGRESS.md and resume from the first
+   non-DONE item.
+2. Order of work: Foundation -> Core engine -> Hidden data + Stego ->
+   Forensics -> Crypto/Web/RE/OSINT -> Verification + Reports + Signature
+   features -> Backend API -> Frontend -> Tool manager + AI -> Hardening ->
+   Tests -> Docs/Deploy.
+3. Automatic gates (replace human approval): after each milestone, run its
+   tests + lint + type-check. If anything fails, fix it and re-run. Only move
+   on when green. Git commit after every green milestone with a clear message.
+4. Create real test fixtures yourself (small PNG with LSB message, ZIP with
+   nested ZIP, file with trailing bytes, base64->hex->utf8 chain, PCAP with
+   HTTP stream, ELF with embedded string, etc.) and assert exact hashes,
+   offsets and decode chains.
+5. At the end print a final report: what works (with real test output), known
+   limitations, how to run. Do not declare completion before the Definition
+   of Done checklist is verified item by item.
+
+=====================================================================
+2. STACK AND ARCHITECTURE
+=====================================================================
+Backend: Python 3.11+, FastAPI, Pydantic v2, SQLAlchemy 2, Alembic, SQLite
+(local) / PostgreSQL (production), background job queue with isolated worker
+processes, structured logging, API versioning (/api/v1).
+Frontend: React + TypeScript + Vite + Tailwind, PWA, responsive, accessible.
+CLI: `ctfx analyze <path>`, `ctfx report <challenge>`, `ctfx tools`.
+Platforms: Windows, Linux, Kali, macOS, Docker, localhost browser, optional
+remote server. No admin rights needed. Kali not required.
+Modes: LOCAL (no login) and REMOTE (auth, sessions, CSRF, rate limit, audit).
+Plugin system: any Python file in plugins/ implementing the Analyzer interface
+is auto-loaded and appears in UI.
+Repo: backend/, frontend/, plugins/, tests/, docs/, scripts/, docker/,
+.github/workflows/. Start by writing the repo tree + threat model in docs/.
+
+=====================================================================
+3. FILE INTAKE
+=====================================================================
+Drag-drop, multi-file, folder, archive upload; size reporting; magic-byte
+type detection (PNG, JPEG, GIF, BMP, TIFF, WEBP, SVG, PDF, DOCX, XLSX, PPTX,
+ZIP, TAR, GZIP, 7Z, RAR, TXT, JSON, XML, HTML, CSV, PCAP, PCAPNG, ELF, PE,
+Mach-O, WAV, MP3, MP4, SQLite, unknown binary); SHA-256; duplicate
+detection; file relationship tracking; safe unicode filenames; recursive
+directories; unknown files get generic binary analysis (never ignored).
+Streaming reads; never load large files fully into memory.
+
+=====================================================================
+4. FLAG DISCOVERY ENGINE
+=====================================================================
+A. Direct detection: configurable regex (FLAG{}, CTF{}, custom event
+   formats), case options, unicode, multiline, binary scan, nested and
+   extracted files. Do not assume standard format. Auto-detect flag format
+   from challenge description / event name when provided.
+B. Strings: ASCII, UTF-8, UTF-16LE/BE, null-separated; record file, offset,
+   encoding, content, method.
+C. Decoder: Base64/32/16, hex, URL, HTML entities, ROT13, Caesar, binary,
+   ASCII decimal, unicode/JSON escapes, UTF-8/16, single-byte XOR, common
+   substitution. Multi-layer with max depth, cycle detection, output size
+   limit, full transformation history, provenance.
+D. Hidden data: metadata/EXIF, embedded files, trailing bytes, hidden archive
+   entries, extension mismatch, null regions, entropy, appended data. Use
+   binwalk/exiftool/file/strings/7z when present, Python fallback otherwise.
+   Never claim hidden content without evidence; say "nothing found" when
+   nothing found.
+
+=====================================================================
+5. ANALYSIS MODULES
+=====================================================================
+STEGO: PNG chunks, LSB, bit-planes, RGB/alpha channels, palette, image
+entropy, odd dimensions, embedded files, image compare, OCR, QR/barcode.
+AUDIO (WAV/MP3/FLAC/OGG): metadata, spectrogram, waveform, frequency view,
+transcription if supported. VIDEO: metadata, frames, OCR on frames, audio
+track, subtitles, embedded files (ffmpeg).
+FORENSICS: PCAP/PCAPNG (Scapy/TShark): protocols, TCP stream reconstruction,
+HTTP/DNS/FTP/SMTP/TLS metadata, file extraction, credentials in challenge
+captures, payload flag scan, stream evidence. Logs (auth, web, app, Windows
+event, syslog, JSON, CSV): timeline, timestamp normalization, correlation,
+suspicious events, flag search. Memory dumps: strings, process artifacts,
+Volatility if present, honest limits otherwise.
+CRYPTO: Caesar, ROT, Atbash, Vigenere, XOR, repeating-key XOR, base/hex/
+binary, frequency analysis + charts, substitution analysis, hash ID +
+compare, RSA/AES educational helpers (small/weak keys, common modulus,
+etc.). Never claim a result without valid derivation; unknown encryption is
+reported as UNRESOLVED.
+WEB (authorized targets only): URL parsing, headers, cookies, HTML/JS/CSS
+inspection, robots/sitemap, forms, source maps, static JS analysis, endpoint
+extraction from supplied content, DevTools guidance, flag search. Guided
+safe workflows for auth, input validation, SQLi/XSS/IDOR/path traversal/
+SSRF/JWT/API/file-upload labs. No scanning, SSRF-protected fetcher.
+REVERSE ENGINEERING: ELF/PE/Mach-O parsing, architecture, imports/exports,
+sections, symbols, strings, basic disassembly, suspicious functions,
+radare2/Rizin/Ghidra/objdump/readelf hooks. Execute binaries ONLY in
+sandbox (container/limited process: no network, CPU/RAM/time limits).
+OSINT (public data only, rate-limited): image metadata, reverse-search
+guidance, geolocation clues, domain/DNS/cert info, username correlation,
+document metadata, timestamp analysis.
+
+=====================================================================
+6. VERIFICATION ENGINE (most important)
+=====================================================================
+Per candidate store: text, source file, source SHA-256, byte offset,
+encoding, extraction method, transform chain, original evidence ref,
+discovery time, challenge id, status, explainable reasons.
+Decoy detection: README/doc examples, placeholders, known samples, repeated
+unrelated strings, irrelevant files, synthetic data; shown as explainable
+reasons; NEVER auto-reject a valid flag just because it looks like a
+placeholder. Authoritative validation: event-specific format rules,
+organizer validation, official platform submission with response capture
+(accepted/rejected stored in verification_events). Never mark VERIFIED
+without it.
+
+SIGNATURE FEATURES
+1. Evidence Graph: file -> extraction -> decode step -> candidate (clickable).
+2. Reproduce Script Export: exact CLI/Python commands to repeat every finding.
+3. Auto Writeup Generator: Markdown from the real evidence chain only.
+4. Smart Triage: rule-based "next steps to try" from file type + description,
+   with reasons, no fake scores.
+5. Hex <-> Evidence deep link: click candidate -> hex viewer jumps to offset.
+6. Flag-format auto-detect.
+7. Plugin system.
+
+=====================================================================
+7. TOOL MANAGER + AI
+=====================================================================
+Detect: Python, Git, 7-Zip, Binwalk, ExifTool, Wireshark, TShark, Nmap,
+Ghidra, Radare2, Rizin, OCR engine, ImageMagick, FFmpeg, Volatility. Show
+installed/missing, version, capabilities, health, install guidance per OS.
+Optional AI (Ollama local or API) with AI-off mode. AI may explain clues,
+suggest methods/tools/decoding sequences, generate hypotheses. AI must never
+fabricate flags/evidence or claim execution. AI output is always labelled
+"Hypothesis" and visually separated from Actual Result, Evidence-supported
+Conclusion, Verified Flag.
+
+=====================================================================
+8. DATABASE + API
+=====================================================================
+Tables: users, challenges, challenge_files, file_hashes, analysis_jobs,
+analysis_results, extracted_artifacts, candidate_flags, flag_evidence,
+decoding_operations, verification_events, tool_inventory, audit_logs,
+reports, settings. PKs, FKs, unique constraints, indexes, transactions,
+Alembic migrations. Users/auth tables used only in REMOTE mode.
+REST /api/v1: POST /challenges, POST /challenges/{id}/files,
+POST /analysis/{id}/start, GET /analysis/{id}/status, GET
+/analysis/{id}/results, GET /flags/candidates, GET /flags/{id}/evidence,
+POST /flags/{id}/validate, GET /tools, GET /reports/{id}, plus whatever the
+UI needs. Pydantic validation, consistent errors, pagination, filtering,
+auth (remote), OpenAPI docs, job progress via SSE/WebSocket, cancellation.
+
+=====================================================================
+9. REPORTS
+=====================================================================
+HTML, JSON, CSV, PDF. Contents: challenge id, date, file names, SHA-256,
+sizes, tool versions, methods, findings, candidates, evidence locations,
+decode history, verification results, limitations, errors, unresolved items.
+Only real findings.
+
+=====================================================================
+10. UI/UX SPEC
+=====================================================================
+Design system:
+- Dark default (bg #0B0F1A, surface #121829, border #1E2740), light optional
+- Accent cyan #22D3EE
+- Status badges (icon + text, never color alone): DISCOVERED gray,
+  CANDIDATE blue, EVIDENCE-SUPPORTED teal, VALIDATION-PENDING amber,
+  VERIFIED green, REJECTED red, UNRESOLVED purple
+- Fonts: Inter (UI), JetBrains Mono (hex/strings/code)
+- 8px grid, 12px radius cards, WCAG AA contrast, reduced-motion support
+Desktop workspace: 3 panels. Left: file tree, extracted artifacts, evidence
+tree. Center tabs: Preview, Hex, Strings, Metadata, Decoded, PCAP, Image.
+Right: candidates, evidence details, source locations, status, transform
+chain. Mobile: bottom nav, single panel, swipe between panels.
+Interactions: Ctrl+K command palette, "/" search, g+h hex, g+e evidence,
+g+r report; drag-drop with per-file progress and cancel; search, filter,
+sort, copy, export, highlight, file compare; "Copy evidence chain",
+"Export writeup", "Export repro script"; skeleton loaders, empty states with
+next-step hints, error states with retry, toasts.
+Pages: Dashboard, New Challenge, Upload, Universal Scanner, Flag Discovery,
+Steganography, Cryptography, Network Forensics, Web Analysis, Reverse
+Engineering, OSINT, Evidence Explorer, History, Tool Manager, Settings,
+Reports. Dashboard widgets (challenges, files, candidates, verified,
+pending, failures, tool availability, recent activity) computed ONLY from
+DB records; show zero/empty state honestly.
+
+=====================================================================
+11. SECURITY + PERFORMANCE
+=====================================================================
+Input validation, file size limits, zip-slip/symlink/path traversal
+protection, archive bomb limits, temp dir isolation, worker isolation with
+CPU/RAM/time limits, never execute uploads on host, SSRF protection, no host
+path leaks, no env/secret leaks, authentication/authorization/sessions/CSRF/
+rate limiting/audit log (remote mode), secrets via env only, dependency
+scanning in CI. Streaming processing, incremental scans, parallelism where
+safe, cancellation, progress, caching by content hash, incremental
+re-analysis, configurable limits.
+
+=====================================================================
+12. TESTS
+=====================================================================
+pytest + frontend tests + Playwright E2E. Cover: upload, hashing, file ID,
+strings, flag detection, base64/hex/ROT13 decode, multi-layer chains, cycle
+detection, archive extraction, nested archives, zip-slip, archive bombs,
+malformed files, invalid input, large files, binary scan, evidence tracking,
+candidate validation, decoy classification, report generation, API security,
+auth, authorization, resource limits, cross-platform paths. Known expected
+outputs. Run everything and show real results.
+
+=====================================================================
+13. DEPLOYMENT + DOCS DELIVERABLES
+=====================================================================
+Dockerfile, docker-compose.yml, .env.example, pyproject.toml/requirements,
+package.json, setup scripts for Windows, Linux, Kali, macOS, CI/CD
+workflows (lint, test, build, dependency audit), README.md (with
+Limitations), LICENSE, CONTRIBUTING.md, SECURITY.md, API docs, user guide,
+developer guide, plugin guide, troubleshooting guide, release build.
+
+=====================================================================
+DEFINITION OF DONE (verify each, show proof)
+=====================================================================
+[ ] `docker compose up` and native run both start backend + frontend
+[ ] Upload a real file -> correct SHA-256, type, strings with offsets
+[ ] Planted multi-layer encoded flag found with correct chain and offset
+[ ] LSB message and embedded file in test image detected; clean file says
+    "nothing found"
+[ ] PCAP test: HTTP stream reconstructed, payload flag found
+[ ] Candidate lifecycle works through all 7 statuses; VERIFIED only via
+    recorded validation event
+[ ] Evidence Graph, Repro Script, Writeup, Smart Triage, Hex deep link work
+[ ] Plugin dropped in plugins/ appears in UI and runs
+[ ] Tool Manager shows real installed/missing tools
+[ ] Reports export in HTML/JSON/CSV/PDF with limitations section
+[ ] Dashboard shows zeros on empty DB, real counts after analysis
+[ ] Zip-slip, archive bomb, path traversal, SSRF tests all blocked
+[ ] All tests green; lint + type-check clean; PROGRESS.md fully DONE
+[ ] Final report printed: real test output + honest limitations
+
+BEGIN NOW: write PROGRESS.md, repo tree, threat model, then build
+continuously through every milestone until the Definition of Done is met.
