@@ -59,10 +59,10 @@ Statuses: `TODO` | `DOING` | `DONE` | `BLOCKED`
 - [x] Keyboard Shortcuts (Ctrl+K palette, '/', 'g+h', 'g+e', 'g+r') <!-- id: 7.7 -->
 
 ## 8. Real Test Fixtures & Test Suite
-- [ ] Real Fixture Generation: LSB PNG, Nested Zip, Base64/Hex/Rot13 chain, PCAP HTTP capture, ELF binary <!-- id: 8.1 -->
-- [ ] Unit & Integration Test Suite (`pytest`) <!-- id: 8.2 -->
-- [ ] Security Verification Tests (Zip-slip, Bomb, SSRF, Path Traversal) <!-- id: 8.3 -->
-- [ ] Frontend Test Suite / verification <!-- id: 8.4 -->
+- [x] Real Fixture Generation: LSB PNG, Nested Zip, Base64/Hex/Rot13 chain, PCAP HTTP capture, ELF binary <!-- id: 8.1 -->
+- [x] Unit & Integration Test Suite (`pytest`) <!-- id: 8.2 -->
+- [x] Security Verification Tests (Zip-slip, Bomb, SSRF, Path Traversal) <!-- id: 8.3 -->
+- [x] Frontend Test Suite / verification <!-- id: 8.4 -->
 
 ## 9. Deployment, Packaging & Documentation
 - [ ] Dockerfile & docker-compose.yml <!-- id: 9.1 -->
