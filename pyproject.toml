@@ -30,6 +30,9 @@ dependencies = [
 [project.scripts]
 ctfx = "backend.ctfx.cli:main"
 
+[tool.setuptools.packages.find]
+include = ["backend*"]
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
