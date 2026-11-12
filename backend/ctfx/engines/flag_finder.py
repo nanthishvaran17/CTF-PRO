@@ -80,7 +80,8 @@ class FlagFinder:
 
         for pattern in self.compiled_patterns:
             try:
-                b_pattern = re.compile(pattern.pattern.encode("utf-8"), pattern.flags)
+                b_flags = pattern.flags & ~re.U
+                b_pattern = re.compile(pattern.pattern.encode("utf-8"), b_flags)
             except Exception:
                 continue
 

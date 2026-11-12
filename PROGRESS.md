@@ -20,26 +20,26 @@ Statuses: `TODO` | `DOING` | `DONE` | `BLOCKED`
 - [x] Multi-layer Recursive Decoder (Base64/32/16, Hex, URL, HTML, ROT13, Caesar, XOR, cyclic guard, provenance tracking) <!-- id: 2.6 -->
 
 ## 3. Specialized Analysis Modules
-- [ ] Stego Analyzer (PNG chunks, LSB extraction, bit planes, channels, entropy, palette, OCR/QR fallback) <!-- id: 3.1 -->
-- [ ] Audio/Video Analyzer (metadata, spectrogram generation, waveform, frequency view, ffmpeg fallback) <!-- id: 3.2 -->
-- [ ] Forensics Analyzer (PCAP/PCAPNG TCP stream reassembly, HTTP/DNS/TLS extraction, credentials, log normalization) <!-- id: 3.3 -->
-- [ ] Cryptography Analyzer (Caesar, Atbash, Vigenere, XOR/repeating XOR, frequency analysis, hash identification, RSA/AES helpers) <!-- id: 3.4 -->
-- [ ] Web Analyzer (Safe URL parser, HTTP client with private IP SSRF-guard, header/cookie inspection, static JS extraction) <!-- id: 3.5 -->
-- [ ] Reverse Engineering Analyzer (ELF/PE/Mach-O header parsing, sections, imports/exports, symbols, disasm fallback) <!-- id: 3.6 -->
-- [ ] OSINT Helper (Metadata extraction, EXIF GPS coordinates, domain/DNS lookup, clue correlation) <!-- id: 3.7 -->
+- [x] Stego Analyzer (PNG chunks, LSB extraction, bit planes, channels, entropy, palette, OCR/QR fallback) <!-- id: 3.1 -->
+- [x] Audio/Video Analyzer (metadata, spectrogram generation, waveform, frequency view, ffmpeg fallback) <!-- id: 3.2 -->
+- [x] Forensics Analyzer (PCAP/PCAPNG TCP stream reassembly, HTTP/DNS/TLS extraction, credentials, log normalization) <!-- id: 3.3 -->
+- [x] Cryptography Analyzer (Caesar, Atbash, Vigenere, XOR/repeating XOR, frequency analysis, hash identification, RSA/AES helpers) <!-- id: 3.4 -->
+- [x] Web Analyzer (Safe URL parser, HTTP client with private IP SSRF-guard, header/cookie inspection, static JS extraction) <!-- id: 3.5 -->
+- [x] Reverse Engineering Analyzer (ELF/PE/Mach-O header parsing, sections, imports/exports, symbols, disasm fallback) <!-- id: 3.6 -->
+- [x] OSINT Helper (Metadata extraction, EXIF GPS coordinates, domain/DNS lookup, clue correlation) <!-- id: 3.7 -->
 
 ## 4. Verification Engine & Signature Features
-- [ ] Candidate Flag lifecycle state machine (7 statuses: DISCOVERED, CANDIDATE, EVIDENCE-SUPPORTED, VALIDATION-PENDING, VERIFIED-BY-CHALLENGE, REJECTED, UNRESOLVED) <!-- id: 4.1 -->
-- [ ] Decoy classifier (heuristics for documentation examples, placeholders, test data with explainable reasons) <!-- id: 4.2 -->
-- [ ] Interactive Evidence Graph builder (File -> Extraction -> Transform -> Candidate) <!-- id: 4.3 -->
-- [ ] Reproduce Script Generator (Python & Shell reproduction commands) <!-- id: 4.4 -->
-- [ ] Auto Writeup Generator (Markdown report from verified evidence chain) <!-- id: 4.5 -->
-- [ ] Smart Triage Engine (next steps recommendation based on file type & clues) <!-- id: 4.6 -->
-- [ ] Plugin System (Auto-discovery of `plugins/*.py` implementing `AnalyzerPlugin`) <!-- id: 4.7 -->
+- [x] Candidate Flag lifecycle state machine (7 statuses: DISCOVERED, CANDIDATE, EVIDENCE-SUPPORTED, VALIDATION-PENDING, VERIFIED-BY-CHALLENGE, REJECTED, UNRESOLVED) <!-- id: 4.1 -->
+- [x] Decoy classifier (heuristics for documentation examples, placeholders, test data with explainable reasons) <!-- id: 4.2 -->
+- [x] Interactive Evidence Graph builder (File -> Extraction -> Transform -> Candidate) <!-- id: 4.3 -->
+- [x] Reproduce Script Generator (Python & Shell reproduction commands) <!-- id: 4.4 -->
+- [x] Auto Writeup Generator (Markdown report from verified evidence chain) <!-- id: 4.5 -->
+- [x] Smart Triage Engine (next steps recommendation based on file type & clues) <!-- id: 4.6 -->
+- [x] Plugin System (Auto-discovery of `plugins/*.py` implementing `AnalyzerPlugin`) <!-- id: 4.7 -->
 
 ## 5. Tool Manager & AI Advisory
-- [ ] System Tool Inventory & Health Checker (Python, Git, 7z, Binwalk, Exiftool, Wireshark/TShark, Ghidra, Radare2, FFmpeg, etc.) <!-- id: 5.1 -->
-- [ ] Optional AI Assistant Interface (Ollama / Open-compatible / Offline mode; strictly marked as "Hypothesis") <!-- id: 5.2 -->
+- [x] System Tool Inventory & Health Checker (Python, Git, 7z, Binwalk, Exiftool, Wireshark/TShark, Ghidra, Radare2, FFmpeg, etc.) <!-- id: 5.1 -->
+- [x] Optional AI Assistant Interface (Ollama / Open-compatible / Offline mode; strictly marked as "Hypothesis") <!-- id: 5.2 -->
 
 ## 6. Database & REST API
 - [ ] Database Schema with SQLAlchemy 2 (challenges, files, hashes, jobs, flags, evidence, decodes, verification_events, audit) <!-- id: 6.1 -->
