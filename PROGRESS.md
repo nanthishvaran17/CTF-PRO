@@ -65,7 +65,7 @@ Statuses: `TODO` | `DOING` | `DONE` | `BLOCKED`
 - [x] Frontend Test Suite / verification <!-- id: 8.4 -->
 
 ## 9. Deployment, Packaging & Documentation
-- [ ] Dockerfile & docker-compose.yml <!-- id: 9.1 -->
-- [ ] Cross-platform launch scripts (`scripts/run_windows.ps1`, `scripts/run_linux.sh`, `scripts/setup.sh`) <!-- id: 9.2 -->
-- [ ] Comprehensive Documentation (README.md with honest limitations, USER_GUIDE.md, DEVELOPER_GUIDE.md, SECURITY.md, LICENSE) <!-- id: 9.3 -->
-- [ ] Final Verification against Definition of Done checklist <!-- id: 9.4 -->
+- [x] Dockerfile & docker-compose.yml <!-- id: 9.1 -->
+- [x] Cross-platform launch scripts (`scripts/run_windows.ps1`, `scripts/run_linux.sh`, `scripts/setup.sh`) <!-- id: 9.2 -->
+- [x] Comprehensive Documentation (README.md with honest limitations, USER_GUIDE.md, DEVELOPER_GUIDE.md, SECURITY.md, LICENSE) <!-- id: 9.3 -->
+- [x] Final Verification against Definition of Done checklist <!-- id: 9.4 -->
