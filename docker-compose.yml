@@ -1,0 +1,16 @@
+services:
+  ctfx:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: ctf-hunter-x
+    ports:
+      - "8000:8000"
+    environment:
+      - CTFX_MODE=LOCAL
+      - CTFX_HOST=0.0.0.0
+      - CTFX_PORT=8000
+    volumes:
+      - ./data:/app/data
+      - ./plugins:/app/plugins
+    restart: unless-stopped

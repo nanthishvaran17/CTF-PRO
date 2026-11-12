@@ -50,13 +50,13 @@ Statuses: `TODO` | `DOING` | `DONE` | `BLOCKED`
 - [x] CLI Interface (`ctfx analyze`, `ctfx report`, `ctfx tools`) <!-- id: 6.6 -->
 
 ## 7. Frontend User Interface
-- [ ] React + Vite + TypeScript + Tailwind CSS project setup <!-- id: 7.1 -->
-- [ ] Cyberpunk / Modern Dark UI Theme (#0B0F1A, #121829, #22D3EE cyan accent, WCAG AA contrast) <!-- id: 7.2 -->
-- [ ] 3-Panel Workspace (File & Evidence Tree, Center multi-tab viewer, Right Candidate inspector) <!-- id: 7.3 -->
-- [ ] Interactive Hex Viewer with byte-range highlight & deep-linking <!-- id: 7.4 -->
-- [ ] Interactive Evidence Graph Canvas & Tree visualization <!-- id: 7.5 -->
-- [ ] All 15 Required Navigation Views & Dashboard widgets <!-- id: 7.6 -->
-- [ ] Keyboard Shortcuts (Ctrl+K palette, '/', 'g+h', 'g+e', 'g+r') <!-- id: 7.7 -->
+- [x] React + Vite + TypeScript + Tailwind CSS project setup <!-- id: 7.1 -->
+- [x] Cyberpunk / Modern Dark UI Theme (#0B0F1A, #121829, #22D3EE cyan accent, WCAG AA contrast) <!-- id: 7.2 -->
+- [x] 3-Panel Workspace (File & Evidence Tree, Center multi-tab viewer, Right Candidate inspector) <!-- id: 7.3 -->
+- [x] Interactive Hex Viewer with byte-range highlight & deep-linking <!-- id: 7.4 -->
+- [x] Interactive Evidence Graph Canvas & Tree visualization <!-- id: 7.5 -->
+- [x] All 15 Required Navigation Views & Dashboard widgets <!-- id: 7.6 -->
+- [x] Keyboard Shortcuts (Ctrl+K palette, '/', 'g+h', 'g+e', 'g+r') <!-- id: 7.7 -->
 
 ## 8. Real Test Fixtures & Test Suite
 - [ ] Real Fixture Generation: LSB PNG, Nested Zip, Base64/Hex/Rot13 chain, PCAP HTTP capture, ELF binary <!-- id: 8.1 -->

@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ctfx"
+version = "1.0.0"
+description = "CTF HUNTER X - Evidence-based CTF Analysis and Flag Discovery Workstation"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "CTF Hunter Team" }]
+license = { text = "MIT" }
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn>=0.28.0",
+    "pydantic>=2.6.0",
+    "pydantic-settings>=2.2.0",
+    "sqlalchemy>=2.0.28",
+    "aiosqlite>=0.20.0",
+    "pillow>=10.2.0",
+    "cryptography>=42.0.5",
+    "reportlab>=4.1.0",
+    "pypdf>=4.1.0",
+    "numpy>=1.26.4",
+    "python-multipart>=0.0.9",
+    "httpx>=0.27.0",
+    "scapy>=2.5.0"
+]
+
+[project.scripts]
+ctfx = "backend.ctfx.cli:main"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
