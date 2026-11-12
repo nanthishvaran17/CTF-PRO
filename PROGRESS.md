@@ -42,12 +42,12 @@ Statuses: `TODO` | `DOING` | `DONE` | `BLOCKED`
 - [x] Optional AI Assistant Interface (Ollama / Open-compatible / Offline mode; strictly marked as "Hypothesis") <!-- id: 5.2 -->
 
 ## 6. Database & REST API
-- [ ] Database Schema with SQLAlchemy 2 (challenges, files, hashes, jobs, flags, evidence, decodes, verification_events, audit) <!-- id: 6.1 -->
-- [ ] FastAPI Application with `/api/v1` routes (REST endpoints, pagination, OpenAPI docs) <!-- id: 6.2 -->
-- [ ] Background Job Execution Queue (cancellation, status reporting, SSE/event streaming) <!-- id: 6.3 -->
-- [ ] Local vs Remote Mode Support (Auth, JWT, CSRF, rate-limiting, audit log) <!-- id: 6.4 -->
-- [ ] Multi-format Report Exporter (HTML, JSON, CSV, PDF) <!-- id: 6.5 -->
-- [ ] CLI Interface (`ctfx analyze`, `ctfx report`, `ctfx tools`) <!-- id: 6.6 -->
+- [x] Database Schema with SQLAlchemy 2 (challenges, files, hashes, jobs, flags, evidence, decodes, verification_events, audit) <!-- id: 6.1 -->
+- [x] FastAPI Application with `/api/v1` routes (REST endpoints, pagination, OpenAPI docs) <!-- id: 6.2 -->
+- [x] Background Job Execution Queue (cancellation, status reporting, SSE/event streaming) <!-- id: 6.3 -->
+- [x] Local vs Remote Mode Support (Auth, JWT, CSRF, rate-limiting, audit log) <!-- id: 6.4 -->
+- [x] Multi-format Report Exporter (HTML, JSON, CSV, PDF) <!-- id: 6.5 -->
+- [x] CLI Interface (`ctfx analyze`, `ctfx report`, `ctfx tools`) <!-- id: 6.6 -->
 
 ## 7. Frontend User Interface
 - [ ] React + Vite + TypeScript + Tailwind CSS project setup <!-- id: 7.1 -->
