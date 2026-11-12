@@ -16,6 +16,7 @@ dependencies = [
     "pydantic>=2.6.0",
     "pydantic-settings>=2.2.0",
     "sqlalchemy>=2.0.28",
+    "greenlet>=3.0.0",
     "aiosqlite>=0.20.0",
     "pillow>=10.2.0",
     "cryptography>=42.0.5",
@@ -35,5 +36,9 @@ include = ["backend*"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
 testpaths = ["tests"]
 pythonpath = ["."]
+filterwarnings = [
+    "ignore::DeprecationWarning"
+]
