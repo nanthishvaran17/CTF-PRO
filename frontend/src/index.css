@@ -4,28 +4,61 @@
 
 @layer base {
   body {
-    @apply bg-[#0B0F1A] text-[#F8FAFC] font-sans antialiased selection:bg-[#22D3EE] selection:text-[#0B0F1A];
+    @apply bg-[#080C14] text-[#F8FAFC] font-sans antialiased selection:bg-[#22D3EE] selection:text-[#080C14];
   }
 }
 
-/* Custom scrollbar */
+/* World-Class Cyber & Glassmorphism Utilities */
+@layer utilities {
+  .glass-card {
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card-hover {
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .glass-card-hover:hover {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(34, 211, 238, 0.3);
+    box-shadow: 0 10px 30px -10px rgba(34, 211, 238, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 25px -5px rgba(34, 211, 238, 0.25);
+  }
+
+  .glow-emerald {
+    box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.25);
+  }
+
+  .cyber-grid {
+    background-image: radial-gradient(rgba(34, 211, 238, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B0F1A;
+  background: #080C14;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E2740;
-  border-radius: 4px;
+  background: #1E293B;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #22D3EE;
+  background: #38BDF8;
 }
 
 /* =====================================================================
-   Light Theme System Overrides
+   Light Theme System Overrides (Crisp Apple/Linear Style)
    ===================================================================== */
 .light,
 html.light,
@@ -35,7 +68,24 @@ html.light body {
   color: #0F172A !important;
 }
 
+html.light .cyber-grid {
+  background-image: radial-gradient(rgba(2, 132, 199, 0.08) 1px, transparent 1px);
+}
+
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(226, 232, 240, 0.8) !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+html.light .glass-card-hover:hover {
+  background: #FFFFFF !important;
+  border-color: rgba(2, 132, 199, 0.4) !important;
+  box-shadow: 0 12px 30px -10px rgba(2, 132, 199, 0.15) !important;
+}
+
 html.light .bg-ctf-bg,
+html.light .bg-\[\#080C14\],
 html.light .bg-\[\#0B0F1A\],
 html.light .bg-\[\#0A0E18\] {
   background-color: #F8FAFC !important;
@@ -91,13 +141,15 @@ html.light .text-ctf-cyan {
 }
 
 html.light aside {
-  background-color: #F8FAFC !important;
+  background-color: #FFFFFF !important;
   border-right-color: #E2E8F0 !important;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.03);
 }
 
 html.light header {
   background-color: #FFFFFF !important;
   border-bottom-color: #E2E8F0 !important;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
 }
 
 html.light input,
