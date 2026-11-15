@@ -16,7 +16,9 @@ import {
   Search,
   Activity,
   Menu,
-  X
+  X,
+  Sun,
+  Moon
 } from "lucide-react";
 
 import { Dashboard } from "./pages/Dashboard";
@@ -41,6 +43,25 @@ export function App() {
   const [challenges, setChallenges] = useState<ChallengeItem[]>([]);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    return (localStorage.getItem("ctfx-theme") as "dark" | "light") || "dark";
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === "light") {
+      root.classList.add("light");
+      root.classList.remove("dark");
+    } else {
+      root.classList.add("dark");
+      root.classList.remove("light");
+    }
+    localStorage.setItem("ctfx-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  };
 
   const refreshChallenges = () => {
     api.listChallenges().then((list) => {
@@ -184,14 +205,34 @@ export function App() {
             </span>
           </div>
 
-          <button
-            onClick={() => setCommandPaletteOpen(true)}
-            className="flex items-center gap-2 px-3 py-1 bg-[#121829] border border-ctf-border rounded text-slate-400 hover:text-white hover:border-ctf-cyan transition-colors"
-          >
-            <Search className="w-3.5 h-3.5" />
-            <span>Search or command...</span>
-            <kbd className="px-1 bg-slate-800 border border-slate-700 rounded text-[10px]">Ctrl+K</kbd>
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              title={theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
+              className="flex items-center gap-1.5 px-2.5 py-1 bg-[#121829] border border-ctf-border rounded text-slate-300 hover:text-white hover:border-ctf-cyan transition-colors"
+            >
+              {theme === "light" ? (
+                <>
+                  <Moon className="w-3.5 h-3.5 text-indigo-500" />
+                  <span className="text-[11px] font-medium hidden sm:inline">Dark</span>
+                </>
+              ) : (
+                <>
+                  <Sun className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="text-[11px] font-medium hidden sm:inline">Light</span>
+                </>
+              )}
+            </button>
+
+            <button
+              onClick={() => setCommandPaletteOpen(true)}
+              className="flex items-center gap-2 px-3 py-1 bg-[#121829] border border-ctf-border rounded text-slate-400 hover:text-white hover:border-ctf-cyan transition-colors"
+            >
+              <Search className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Search or command...</span>
+              <kbd className="px-1 bg-slate-800 border border-slate-700 rounded text-[10px]">Ctrl+K</kbd>
+            </button>
+          </div>
         </header>
 
         {/* Active Page View */}

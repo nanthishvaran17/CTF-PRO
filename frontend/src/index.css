@@ -23,3 +23,114 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #22D3EE;
 }
+
+/* =====================================================================
+   Light Theme System Overrides
+   ===================================================================== */
+.light,
+html.light,
+html.light body {
+  color-scheme: light;
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+html.light .bg-ctf-bg,
+html.light .bg-\[\#0B0F1A\],
+html.light .bg-\[\#0A0E18\] {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+html.light .bg-ctf-surface,
+html.light .bg-\[\#121829\],
+html.light .bg-\[\#0F172A\] {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+}
+
+html.light .bg-slate-900,
+html.light .bg-slate-900\/50,
+html.light .bg-slate-900\/60,
+html.light .bg-slate-900\/80,
+html.light .bg-slate-800,
+html.light .bg-slate-800\/40,
+html.light .bg-slate-800\/50,
+html.light .bg-slate-800\/60,
+html.light .bg-slate-800\/80,
+html.light .bg-slate-950,
+html.light .bg-slate-950\/60,
+html.light .bg-slate-950\/80 {
+  background-color: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+
+html.light .border-ctf-border,
+html.light .border-\[\#1E2740\],
+html.light .border-slate-800,
+html.light .border-slate-700,
+html.light .border-slate-800\/60,
+html.light .border-slate-700\/50 {
+  border-color: #E2E8F0 !important;
+}
+
+html.light .text-white,
+html.light .text-\[\#F8FAFC\],
+html.light .text-slate-200,
+html.light .text-slate-300 {
+  color: #0F172A !important;
+}
+
+html.light .text-slate-400,
+html.light .text-slate-500 {
+  color: #64748B !important;
+}
+
+html.light .text-ctf-cyan {
+  color: #0284C7 !important;
+}
+
+html.light aside {
+  background-color: #F8FAFC !important;
+  border-right-color: #E2E8F0 !important;
+}
+
+html.light header {
+  background-color: #FFFFFF !important;
+  border-bottom-color: #E2E8F0 !important;
+}
+
+html.light input,
+html.light select,
+html.light textarea {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+html.light pre,
+html.light code {
+  background-color: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+
+html.light kbd {
+  background-color: #E2E8F0 !important;
+  color: #475569 !important;
+  border-color: #CBD5E1 !important;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
